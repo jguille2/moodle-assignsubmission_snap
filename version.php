@@ -24,7 +24,7 @@
 defined ( 'MOODLE_INTERNAL' ) || die ();
 
 $plugin->version = 2020062200;
-$plugin->requires = 2020061500.00; // Moodle 3.9.
+$plugin->requires = 2019111800; //Moodle 3.8 and 3.9 suported and tested
 $plugin->component = 'assignsubmission_snap';
 $plugin->release = 'v0.1';
 $plugin->maturity = MATURITY_BETA;
