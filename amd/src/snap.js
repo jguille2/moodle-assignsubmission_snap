@@ -139,6 +139,21 @@ const customizeSnap = () => {
         return;
     };
 */
+    const snapFrame = getSnapFrame();
+    // Adding Snap! embedded info to Snap! menu
+    snapFrame.contentWindow.IDE_Morph.prototype.originalSnapMenu = snapFrame.contentWindow.IDE_Morph.prototype.snapMenu;
+    snapFrame.contentWindow.IDE_Morph.prototype.snapMenu = function () {
+        this.originalSnapMenu();
+        var menu = this.world().activeMenu;
+        menu.addLine();
+        menu.addItem('Snap! embedded in Moodle');
+        menu.popup(this.world(), this.logo.bottomLeft());
+    };
+    // Disabling cloud menu options
+    snapFrame.contentWindow.IDE_Morph.prototype.cloudMenu = function () {
+        this.showMessage('Cloud unavailable from this Moodle server');
+        return;
+    };
 };
 
 const updateProject = () => {
