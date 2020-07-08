@@ -40,8 +40,13 @@
     }
 
 }}
-<div class="snap-iframe-wrapper">
-    <iframe src="{{snapurl}}" id="snap-{{snapmode}}-{{userid}}-{{attempt}}" style="height:{{height}}; min-width: {{width}}">
+<div id="snapContainer" class="snap-iframe-wrapper" style="width: 100%; overflow: auto;">
+    <div class="snap-navbar">
+        <span>{{#pix}} snapMoodle, assignsubmission_snap, Snap! in Moodle {{/pix}}</span>
+        <a href="#" id="togglingFS" onclick="require(['assignsubmission_snap/frame'], function(Frame) {Frame.toogleFullScreen();}); return false;"><i id="togglingFSicon" class="fa fa-fw fa-expand"></i></a>
+        <a href="#" onclick="document.getElementById('id_submitbutton').click()"><i class="fa fa-fw fa-save"></i></a>
+    </div>
+    <iframe src="{{snapurl}}" id="snap-{{snapmode}}-{{userid}}-{{attempt}}" style="width:100%; height: 650px" allow="fullscreen">
     </iframe>
 </div>
 {{#js}}

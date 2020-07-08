@@ -60,7 +60,7 @@ const initializeProject = (xmlProject, snapMode, userid, attemptNumber) => {
             preventWindowChanges();
         }
 
-        // Customize Snap!, to hide Cloud options.
+        // Customize Snap! and hide Cloud options.
         customizeSnap();
     }
 };
@@ -129,16 +129,6 @@ const preventWindowChanges = () => {
 };
 
 const customizeSnap = () => {
-/*
-    const snapFrame = getSnapFrame();
-
-    // It would disable the Cloud menu (but it doesn't hide it).
-    // For now, it will be leave as it is (because it might help users to find and load their Snap! Cloud projects).
-    snapFrame.contentWindow.IDE_Morph.prototype.cloudMenu = function () {
-        this.showMessage('Cloud unavailable from Snap! assignment submission');
-        return;
-    };
-*/
     const snapFrame = getSnapFrame();
     // Adding Snap! embedded info to Snap! menu
     snapFrame.contentWindow.IDE_Morph.prototype.originalSnapMenu = snapFrame.contentWindow.IDE_Morph.prototype.snapMenu;

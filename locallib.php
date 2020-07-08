@@ -390,7 +390,7 @@ class assign_submission_snap extends assign_submission_plugin {
      * @return string the iframe to display the Snap! content.
      */
     private function get_view_snapframe(string $userid, string $attempt, string $mode = 'edit', string $xmlproject = null,
-            string $width = '100%', string $height = '800px'): string {
+            string $width = '100%', string $height = '600px'): string {
         global $CFG, $OUTPUT, $USER;
 
         // TODO: Check if it's possible to hide menus in Snap!.
