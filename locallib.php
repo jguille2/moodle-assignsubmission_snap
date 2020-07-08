@@ -83,7 +83,7 @@ class assign_submission_snap extends assign_submission_plugin {
         $mform->addElement('hidden', 'xmlproject', $xmlproject);
         $mform->setType('xmlproject', PARAM_RAW);
 
-        $html = $this->get_view_snapframe($submission->userid, $submission->attemptnumber);
+        $html = $this->get_view_snapframe($submission->userid, $submission->attemptnumber, 'edit', null, '100%', '600px', true);
         $mform->addElement('html', $html);
 
         return true;
@@ -194,6 +194,7 @@ class assign_submission_snap extends assign_submission_plugin {
      * @param bool $showviewlink - If the summary has been truncated set this to true
      * @return string
      */
+/** Original view_summary, waiting to add controls to the frame
     public function view_summary(stdClass $submission, & $showviewlink): string {
         $html = '';
 
@@ -210,14 +211,14 @@ class assign_submission_snap extends assign_submission_plugin {
 
         return $html;
     }
-
+**/
     /**
      * Display the saved content from the editor in the view table.
      *
      * @param stdClass $submission
      * @return string
      */
-    public function view(stdClass $submission): string {
+    public function view_summary(stdClass $submission): string {
         // It will display always the full editor.
         $xmlproject = $this->get_xmlproject($submission);
         $html = $this->get_view_snapframe($submission->userid, $submission->attemptnumber, 'noedit', $xmlproject);
@@ -390,10 +391,8 @@ class assign_submission_snap extends assign_submission_plugin {
      * @return string the iframe to display the Snap! content.
      */
     private function get_view_snapframe(string $userid, string $attempt, string $mode = 'edit', string $xmlproject = null,
-            string $width = '100%', string $height = '600px'): string {
+            string $width = '100%', string $height = '600px', bool $editable = false): string {
         global $CFG, $OUTPUT, $USER;
-
-        // TODO: Check if it's possible to hide menus in Snap!.
 
         $template = new \stdClass();
         $template->snapurl = "$CFG->wwwroot/mod/assign/submission/snap/snaplib/snap.html";
@@ -408,6 +407,7 @@ class assign_submission_snap extends assign_submission_plugin {
         $template->snapmode = $mode;
         $template->width = $width;
         $template->height = $height;
+        $template->editable = $editable;
 
         $html = $OUTPUT->render_from_template('assignsubmission_snap/snapiframe', $template);
 
