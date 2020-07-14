@@ -22,11 +22,11 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-export const toogleFullScreen = () => {
+export const toogleFullScreen = (snapmode, userid, attempt) => {
     if (!isFullScreen()) {
-        enterFS();
+        enterFS(snapmode, userid, attempt);
     } else {
-        exitFS();
+        exitFS(snapmode, userid, attempt);
     }
 };
 
@@ -36,9 +36,10 @@ const isFullScreen = () => {
         (document.mozFullScreen || document.webkitIsFullScreen);
 };
 
-const enterFS = () => {
+const enterFS = (snapmode, userid, attempt) => {
     var cont = document.getElementById('snapContainer'),
-        toggler = document.getElementById('togglingFSicon');
+        toggler = document.getElementById('togglingFSicon'),
+        iframe = document.getElementById('snap-' + snapmode + '-' + userid + '-' + attempt);
     if (cont.requestFullscreen) {
         cont.requestFullscreen();
     } else if (cont.mozRequestFullScreen) {
@@ -50,12 +51,17 @@ const enterFS = () => {
     }
     toggler.classList.remove('fa-expand');
     toggler.classList.add('fa-compress');
+    iframe.classList.remove('snap-iframe-hidden');
+    iframe.classList.add('snap-iframe-show');
 };
 
-const exitFS = () => {
-    var toggler = document.getElementById('togglingFSicon');
+const exitFS = (snapmode, userid, attempt) => {
+    var toggler = document.getElementById('togglingFSicon'),
+        iframe = document.getElementById('snap-' + snapmode + '-' + userid + '-' + attempt);
     toggler.classList.remove('fa-compress');
     toggler.classList.add('fa-expand');
+    iframe.classList.remove('snap-iframe-show');
+    iframe.classList.add('snap-iframe-hidden');
     if (document.exitFullScreen) {
         document.exitFullScreen();
     } else if (document.webkitExitFullscreen) {

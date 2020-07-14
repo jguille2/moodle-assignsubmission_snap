@@ -19,7 +19,6 @@
   color: white;
 }
 
-/* Navbar links */
 .snap-navbar a:hover {
   background-color: #000;
 }
@@ -34,4 +33,10 @@
   font-size: 30px;
   width: 30px;
   height: 30px;
+}
+
+/* Embedded Snap! iframe classes */
+.snap-iframe-hidden {
+    position: absolute;
+    left: -5000px;
 }

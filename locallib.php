@@ -194,31 +194,28 @@ class assign_submission_snap extends assign_submission_plugin {
      * @param bool $showviewlink - If the summary has been truncated set this to true
      * @return string
      */
-/** Original view_summary, waiting to add controls to the frame
     public function view_summary(stdClass $submission, & $showviewlink): string {
         $html = '';
 
         $snapsubmission = $this->get_snap_submission($submission->id);
         if ($snapsubmission) {
-            // Always display the view link.
-            // The player will be displayed with view_summary() and the full Snap! editor will be displayed with view().
-            $showviewlink = true;
-
+            // Only shows the Snap! embedded toolbar and loads the Snap! project inside the hidden iframe. This toolbar links to the fullscreen project.
+            //$showviewlink = true;
             $xmlproject = $this->get_xmlproject($submission);
             $html = $this->get_view_snapframe($submission->userid, $submission->attemptnumber,
-                'embed', $xmlproject, '40%', '400px');
+                'noedit', $xmlproject, '100%', '50px', false, true);
         }
-
         return $html;
     }
-**/
+
     /**
      * Display the saved content from the editor in the view table.
      *
      * @param stdClass $submission
      * @return string
      */
-    public function view_summary(stdClass $submission): string {
+    public function view(stdClass $submission): string {
+        $html = '';
         // It will display always the full editor.
         $xmlproject = $this->get_xmlproject($submission);
         $html = $this->get_view_snapframe($submission->userid, $submission->attemptnumber, 'noedit', $xmlproject);
@@ -391,7 +388,7 @@ class assign_submission_snap extends assign_submission_plugin {
      * @return string the iframe to display the Snap! content.
      */
     private function get_view_snapframe(string $userid, string $attempt, string $mode = 'edit', string $xmlproject = null,
-            string $width = '100%', string $height = '600px', bool $editable = false): string {
+            string $width = '100%', string $height = '600px', bool $editable = false, bool $ihidden = false): string {
         global $CFG, $OUTPUT, $USER;
 
         $template = new \stdClass();
@@ -408,6 +405,7 @@ class assign_submission_snap extends assign_submission_plugin {
         $template->width = $width;
         $template->height = $height;
         $template->editable = $editable;
+        $template->ihidden = $ihidden;
 
         $html = $OUTPUT->render_from_template('assignsubmission_snap/snapiframe', $template);
 
