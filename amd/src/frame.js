@@ -37,8 +37,8 @@ const isFullScreen = () => {
 };
 
 const enterFS = (snapmode, userid, attempt) => {
-    var cont = document.getElementById('snapContainer'),
-        toggler = document.getElementById('togglingFSicon'),
+    var cont = document.getElementById('snapContainer-' + snapmode + '-' + userid + '-' + attempt),
+        toggler = document.getElementById('togglingFSicon-' + snapmode + '-' + userid + '-' + attempt),
         iframe = document.getElementById('snap-' + snapmode + '-' + userid + '-' + attempt);
     if (cont.requestFullscreen) {
         cont.requestFullscreen();
@@ -51,17 +51,21 @@ const enterFS = (snapmode, userid, attempt) => {
     }
     toggler.classList.remove('fa-expand');
     toggler.classList.add('fa-compress');
-    iframe.classList.remove('snap-iframe-hidden');
-    iframe.classList.add('snap-iframe-show');
+    if (iframe.classList.contains('snap-iframe-hidden')) {
+       iframe.classList.remove('snap-iframe-hidden');
+       iframe.classList.add('snap-iframe-show');
+    }
 };
 
 const exitFS = (snapmode, userid, attempt) => {
-    var toggler = document.getElementById('togglingFSicon'),
+    var toggler = document.getElementById('togglingFSicon-' + snapmode + '-' + userid + '-' + attempt),
         iframe = document.getElementById('snap-' + snapmode + '-' + userid + '-' + attempt);
     toggler.classList.remove('fa-compress');
     toggler.classList.add('fa-expand');
-    iframe.classList.remove('snap-iframe-show');
-    iframe.classList.add('snap-iframe-hidden');
+    if (iframe.classList.contains('snap-iframe-show')) {
+        iframe.classList.remove('snap-iframe-show');
+        iframe.classList.add('snap-iframe-hidden');
+    }
     if (document.exitFullScreen) {
         document.exitFullScreen();
     } else if (document.webkitExitFullscreen) {
