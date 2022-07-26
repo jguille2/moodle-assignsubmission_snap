@@ -22,8 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['default'] = 'Enabled by default';
-$string['default_help'] = 'If set, this submission method will be enabled by default for all new assignments.';
+$string['default'] = 'Selected by default in new assignments';
+$string['default_help'] = 'If set, this submission method will be selected by default for all new assignments.';
 $string['enabled'] = 'Snap!';
 $string['enabled_help'] = 'If enabled, students are able to edit and send Snap! projects directly for their submission. ' .
     'If a Snap! XML file is attached into the "Additional files" section, it will be used as a template (starting point) for the student '.
@@ -40,5 +40,7 @@ $string['snapfilename'] = 'snapproject.xml';
 $string['snap_project'] = 'Snap! project';
 $string['snap_embedded'] = 'Snap! embedded in Moodle';
 $string['snap_readonlywarning'] = 'READ-ONLY MODE';
-$string['snap_urlInfo'] = 'Snap! URL';
-$string['snap_urlInfoDetails'] = 'Your Snap! embedded in Moodle is also available directly from your server by this URL:';
+$string['url'] = 'Snap! URLs availables';
+$string['url_help'] = 'The pairs [\'name\', \'url\'] of all the distributions that we want to enable must be entered. '.
+     'The \'name\' is important because it will identify the distribution on subsequent URL changes. '.
+     'The first option (pair) will be the default option';

@@ -22,8 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['default'] = 'Habilitat per defecte';
-$string['default_help'] = 'Si està habilitat, aquest mètode de tramesa s\'habilitarà per defecte per a totes les tasques noves.';
+$string['default'] = 'Seleccionat per defecte en les tasques noves';
+$string['default_help'] = 'Si està marcat, aquest mètode de tramesa estarà seleccionat per defecte en les tasques noves.';
 $string['enabled'] = 'Snap!';
 $string['enabled_help'] = 'Si està habilitat, l\'estudiantat podrà editar i enviar projectes de Snap! a les seves trameses. ' .
     'Si un projete de Snap! en format de fitxer XML s\'adjunta a la secció de "Fitxes addicionals", aquest serà utilitzat com a plantilla (punt de partida) dels estudiants '.
@@ -40,5 +40,7 @@ $string['snapfilename'] = 'snapproject.xml';
 $string['snap_project'] = 'Projecte de Snap!';
 $string['snap_embedded'] = 'Snap! en Moodle';
 $string['snap_readonlywarning'] = 'MODE DE LECTURA';
-$string['snap_urlInfo'] = 'URL de Snap!';
-$string['snap_urlInfoDetails'] = 'La distribució de Snap! utilitzada per Moodle també estarà disponible directament al vostre servidor per la URL:';
+$string['url'] = 'URLs de Snap! disponibles';
+$string['url_help'] = 'Cal entrar les parelles [\'nom\', \'url\'] de totes les distribucions que volguem habilitar. '.
+    'El \'nom\' és important perquè identificarà la distribució en canvis de URL posteriors. '.
+    'La primera opció (parella) serà l\'opció per defecte';

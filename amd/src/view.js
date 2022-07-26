@@ -17,14 +17,11 @@
  * This module handles the events of the frame container of the Snap! editor.
  *
  * @module     assignsubmission_snap/snap
- * @package   assignsubmission_snap
  * @copyright 2020 Sara Arjona <sara@moodle.com> and Joan Guillén <jguille2@xtec.cat>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-import * as Init from './init';
 
-export const start = (xmlproject, userid, attempt, editable) => {
-    Init.init(xmlproject, userid, attempt, editable);
+export const start = (xmlproject, userid, attempt) => {
     var pluginButton = document.getElementById('snapButton_snap-' + userid + '-' + attempt),
         pluginPlay = document.getElementById('play_snap-' + userid + '-' + attempt),
         newOnClick = "require(['assignsubmission_snap/view'], function(View) {View.toogleFullScreen('" +

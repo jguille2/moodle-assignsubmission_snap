@@ -22,8 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['default'] = 'Habilitado por defecto';
-$string['default_help'] = 'Si está habilitado, este tipo de envío se habilitará por defecto en las nuevas tareas.';
+$string['default'] = 'Seleccionado por defecto en las nuevas tareas';
+$string['default_help'] = 'Si está marcado, este tipo de envío se seleccionará por defecto en las nuevas tareas.';
 $string['enabled'] = 'Snap!';
 $string['enabled_help'] = 'Si está habilitado, los estudiantes podrán editar y enviar proyectos de Snap! en los envíos. ' .
     'Si un proyecto de Snap! en formato XML se adjunta en la sección de "Archivos adicionales", éste será utilitzado como plantilla (punto de salida) de los estudiantes '.
@@ -40,5 +40,7 @@ $string['snapfilename'] = 'snapproject.xml';
 $string['snap_project'] = 'Proyecto de Snap!';
 $string['snap_embedded'] = 'Snap! en Moodle';
 $string['snap_readonlywarning'] = 'MODO DE LECTURA';
-$string['snap_urlInfo'] = 'URL de Snap!';
-$string['snap_urlInfoDetails'] = 'La distribución de Snap! utilizada por Moodle también está disponible directamente en vuestro servidor desde la URL:';
+$string['url'] = 'URLs de Snap! disponibles';
+$string['url_help'] = 'Se han de introducir las parejas [\'nombre\', \'url\'] de todas les distribuciones que queramos habilitar. '.
+    'El \'nombre\' es importante porque identificará la distribución en cambios de URL posteriores. '.
+    'La primera opción (pareja) será la opción por defecto';

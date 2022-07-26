@@ -43,8 +43,8 @@
 
 }}
 <div class="snap-button_snap{{#loaded}} snap-hidden_snap"{{/loaded}}">
-    <span id="snapButton_snap-{{userid}}-{{attempt}}" onclick="require(['assignsubmission_snap/view'], function(View) {View.start('{{snap_xmlproject}}', '{{userid}}', '{{attempt}}', {{#editable}}true{{/editable}}{{^editable}}false{{/editable}});});">{{#pix}} snapMoodle, assignsubmission_snap, Snap! in Moodle {{/pix}}</span>
-    <a href="#" id="play_snap-{{userid}}-{{attempt}}" onclick="require(['assignsubmission_snap/view'], function(View) {View.start('{{snap_xmlproject}}', '{{userid}}', '{{attempt}}', {{#editable}}true{{/editable}}{{^editable}}false{{/editable}});}); return false;"><i id="playicon_snap-{{userid}}-{{attempt}}" class="fa fa-fw fa-play"></i></a>
+    <span id="snapButton_snap-{{userid}}-{{attempt}}" onclick="require(['assignsubmission_snap/view'], function(View) {View.start('{{snap_xmlproject}}', '{{userid}}', '{{attempt}}');});">{{#pix}} snapMoodle, assignsubmission_snap, Snap! in Moodle {{/pix}}</span>
+    <a href="#" id="play_snap-{{userid}}-{{attempt}}" onclick="require(['assignsubmission_snap/view'], function(View) {View.start('{{snap_xmlproject}}', '{{userid}}', '{{attempt}}');}); return false;"><i id="playicon_snap-{{userid}}-{{attempt}}" class="fa fa-fw fa-play"></i></a>
 </div>
 
 <div id="snapContainer_snap-{{userid}}-{{attempt}}"{{^loaded}} class="snap-hidden_snap"{{/loaded}} style="width: {{width}}; height: {{height}}; overflow: auto;">
@@ -54,9 +54,9 @@
         {{#editable}}<a href="#" onclick="document.getElementById('id_submitbutton').click()"><i class="fa fa-fw fa-save"></i></a>{{/editable}}
         {{^editable}}<span class="snap-readonlyWarning_snap">{{#str}} snap_readonlywarning, assignsubmission_snap {{/str}}</span>{{/editable}}
     </div>
-    <iframe src="{{snapurl}}" id="snap_snap-{{userid}}-{{attempt}}" style="width:910px; height: 500px">
+    <iframe src="{{snapurl}}#run:{{snap_xmlproject}}&noRun&editMode&noExitWarning&lang=ca&noCloud" id="snap_snap-{{userid}}-{{attempt}}" style="width:910px; height: 500px">
     </iframe>
 </div>
-{{#js}}
-    require(['assignsubmission_snap/init'], function(Init) {Init.preInit('{{userid}}', '{{attempt}}', {{#loaded}}true{{/loaded}}{{^loaded}}false{{/loaded}}, {{#editable}}true{{/editable}}{{^editable}}false{{/editable}}, '{{snap_xmlproject}}');});
-{{/js}}
+{{#editable}}{{#js}}
+    require(['assignsubmission_snap/init'], function(Init) {Init.init('{{snap_xmlproject}}', '{{userid}}', '{{attempt}}', true);});
+{{/js}}{{/editable}}

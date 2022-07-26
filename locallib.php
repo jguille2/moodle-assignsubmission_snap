@@ -31,6 +31,7 @@
  */
 class assign_submission_snap extends assign_submission_plugin {
 
+    
     /**
      * Get the name of the snap submission plugin.
      * @return string
@@ -61,7 +62,7 @@ class assign_submission_snap extends assign_submission_plugin {
         $mform->addElement('hidden', 'snap_xmlproject', $xmlproject);
         $mform->setType('snap_xmlproject', PARAM_RAW);
 
-        $html = $this->get_view_snapframe($submission->userid, $submission->attemptnumber, true, null, '100%', '560px', true);
+        $html = $this->get_view_snapframe($submission->userid, $submission->attemptnumber, true, $xmlproject, '100%', '560px', true);
         $mform->addElement('header', 'snapProject', get_string('snap_project', 'assignsubmission_snap'));
         $mform->addElement('html', $html, $this->get_name(), null, null);
 
@@ -354,7 +355,8 @@ class assign_submission_snap extends assign_submission_plugin {
         global $CFG, $OUTPUT, $USER;
 
         $template = new \stdClass();
-        $template->snapurl = "$CFG->wwwroot/mod/assign/submission/snap/run/index.html";
+        $config = get_config('assignsubmission_snap');
+        $template->snapurl = $config->url;
         if ($xmlproject) {
             $template->snap_xmlproject = $xmlproject;
         }
