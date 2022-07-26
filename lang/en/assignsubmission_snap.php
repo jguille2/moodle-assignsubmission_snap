@@ -22,6 +22,11 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+$string['cloud'] = 'Snap! cloud features';
+$string['cloud_help'] = 'Moodle can enable/disable Snap! cloud features and, if enabled, each assignment can individually enable them or not.';
+$string['cloud_op_bydefault'] = 'Snap! cloud features enabled and selected by default';
+$string['cloud_op_disabled'] = 'Snap! cloud features disabled';
+$string['cloud_op_enabled'] = 'Snap! cloud features enabled but not selected by default';
 $string['default'] = 'Selected by default in new assignments';
 $string['default_help'] = 'If set, this submission method will be selected by default for all new assignments.';
 $string['enabled'] = 'Snap!';
@@ -43,4 +48,4 @@ $string['snap_readonlywarning'] = 'READ-ONLY MODE';
 $string['url'] = 'Snap! URLs availables';
 $string['url_help'] = 'The pairs [\'name\', \'url\'] of all the distributions that we want to enable must be entered. '.
      'The \'name\' is important because it will identify the distribution on subsequent URL changes. '.
-     'The first option (pair) will be the default option';
+     'The first option (pair) will be the default option.';

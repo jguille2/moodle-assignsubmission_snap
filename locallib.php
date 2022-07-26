@@ -22,13 +22,19 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+/// CONSTANTS ///////////////////////////////////////////////////////////
+
+define('ASSIGNSUBMISSION_SNAP_CLOUDDISABLED', 0);
+define('ASSIGNSUBMISSION_SNAP_CLOUDENABLED', 1);
+define('ASSIGNSUBMISSION_SNAP_CLOUDBYDEFAULT', 2);
+
 /**
  * Library class for snap submission plugin extending submission plugin base class.
  *
  * @package   assignsubmission_snap
  * @copyright 2020 Sara Arjona <sara@moodle.com> and Joan Guillén <jguille2@xtec.cat>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+ */+-
 class assign_submission_snap extends assign_submission_plugin {
 
     

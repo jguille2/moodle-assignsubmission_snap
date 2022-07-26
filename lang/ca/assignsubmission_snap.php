@@ -22,6 +22,11 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+$string['cloud'] = 'Ús del "cloud" de Snap!';
+$string['cloud_help'] = 'Moodle pot habilitar/deshabilitar les funcionalitats de "cloud" de Snap! i, si s\'habiliten, cada tasca pot individualment habilitar-les o no.';
+$string['cloud_op_bydefault'] = 'Snap! cloud habilitat i seleccionat per defecte';
+$string['cloud_op_disabled'] = 'Snap! cloud deshabilitat';
+$string['cloud_op_enabled'] = 'Snap! cloud habilitat però no seleccionat per defecte';
 $string['default'] = 'Seleccionat per defecte en les tasques noves';
 $string['default_help'] = 'Si està marcat, aquest mètode de tramesa estarà seleccionat per defecte en les tasques noves.';
 $string['enabled'] = 'Snap!';

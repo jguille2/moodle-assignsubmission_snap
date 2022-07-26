@@ -34,9 +34,9 @@ $settings->add(new admin_setting_configtext('assignsubmission_snap/url',
                    [['Snap!','hhtps://snap.berkeley.edu/snap.snap.html']]));
 
 $options = array();
-$options[ASSIGNSUBMISSION_SNAP_CLOUDDISABLED] = get_string('cloud_disabled', 'assignsubmission_snap');
-$options[ASSIGNSUBMISSION_SNAP_CLOUDENABLED] = get_string('cloud_enabled', 'assignsubmission_snap');
-$options[ASSIGNSUBMISSION_SNAP_CLOUDBYDEFAULT] = get_string('cloud_bydefault', 'assignsubmission_snap');
+$options[ASSIGNSUBMISSION_SNAP_CLOUDDISABLED] = get_string('cloud_op_disabled', 'assignsubmission_snap');
+$options[ASSIGNSUBMISSION_SNAP_CLOUDENABLED] = get_string('cloud_op_enabled', 'assignsubmission_snap');
+$options[ASSIGNSUBMISSION_SNAP_CLOUDBYDEFAULT] = get_string('cloud_op_bydefault', 'assignsubmission_snap');
 $settings->add(new admin_setting_configselect('assignsubmission_snap/cloud',
                    new lang_string('cloud', 'assignsubmission_snap'),
                    new lang_string('cloud_help', 'assignsubmission_snap'),
