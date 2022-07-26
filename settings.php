@@ -24,20 +24,23 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$settings->add(new admin_setting_configcheckbox('assignsubmission_snap/default',
+if ($ADMIN->fulltree) {
+    require_once($CFG->dirroot.'/mod/assign/submission/snap/lib.php');
+    $settings->add(new admin_setting_configcheckbox('assignsubmission_snap/default',
                    new lang_string('default', 'assignsubmission_snap'),
                    new lang_string('default_help', 'assignsubmission_snap'), 0));
 
-$settings->add(new admin_setting_configtext('assignsubmission_snap/url',
+    $settings->add(new admin_setting_configtext('assignsubmission_snap/url',
                    new lang_string('url', 'assignsubmission_snap'),
                    new lang_string('url_help', 'assignsubmission_snap'),
                    [['Snap!','hhtps://snap.berkeley.edu/snap.snap.html']]));
 
-$options = array();
-$options[ASSIGNSUBMISSION_SNAP_CLOUDDISABLED] = get_string('cloud_op_disabled', 'assignsubmission_snap');
-$options[ASSIGNSUBMISSION_SNAP_CLOUDENABLED] = get_string('cloud_op_enabled', 'assignsubmission_snap');
-$options[ASSIGNSUBMISSION_SNAP_CLOUDBYDEFAULT] = get_string('cloud_op_bydefault', 'assignsubmission_snap');
-$settings->add(new admin_setting_configselect('assignsubmission_snap/cloud',
+    $options = array();
+    $options[ASSIGNSUBMISSION_SNAP_CLOUDDISABLED] = get_string('cloud_op_disabled', 'assignsubmission_snap');
+    $options[ASSIGNSUBMISSION_SNAP_CLOUDENABLED] = get_string('cloud_op_enabled', 'assignsubmission_snap');
+    $options[ASSIGNSUBMISSION_SNAP_CLOUDBYDEFAULT] = get_string('cloud_op_bydefault', 'assignsubmission_snap');
+    $settings->add(new admin_setting_configselect('assignsubmission_snap/cloud',
                    new lang_string('cloud', 'assignsubmission_snap'),
                    new lang_string('cloud_help', 'assignsubmission_snap'),
                    ASSIGNSUBMISSION_SNAP_CLOUDDISABLED, $options));
+}

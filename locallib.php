@@ -22,11 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-/// CONSTANTS ///////////////////////////////////////////////////////////
-
-define('ASSIGNSUBMISSION_SNAP_CLOUDDISABLED', 0);
-define('ASSIGNSUBMISSION_SNAP_CLOUDENABLED', 1);
-define('ASSIGNSUBMISSION_SNAP_CLOUDBYDEFAULT', 2);
+require_once($CFG->dirroot.'/mod/assign/submission/snap/lib.php');
 
 /**
  * Library class for snap submission plugin extending submission plugin base class.
@@ -34,7 +30,8 @@ define('ASSIGNSUBMISSION_SNAP_CLOUDBYDEFAULT', 2);
  * @package   assignsubmission_snap
  * @copyright 2020 Sara Arjona <sara@moodle.com> and Joan Guillén <jguille2@xtec.cat>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */+-
+ */
+ 
 class assign_submission_snap extends assign_submission_plugin {
 
     
@@ -45,6 +42,42 @@ class assign_submission_snap extends assign_submission_plugin {
     public function get_name(): string {
         return get_string('snap', 'assignsubmission_snap');
     }
+
+    /**
+     * Get the default setting for Snap! submission plugin
+     *
+     * @param MoodleQuickForm $mform The form to add elements to
+     * @return void
+     */
+    public function get_settings(MoodleQuickForm $mform) {
+        global $CFG, $COURSE;
+
+        $name = get_string('cloud', 'assignsubmission_snap');
+        $mform->addElement('advcheckbox', 'assignsubmission_snap_cloudenabled',
+                $name, get_string('enable'), null, array(0,1));
+        $mform->setDefault('assignsubmission_snap_cloudenabled', 0);
+        $admincloudfeatures = get_config('assignsubmission_snap', 'cloud');
+        if ($admincloudfeatures == 0) {
+            $mform->disabledIf('assignsubmission_snap_cloudenabled', null);
+        } elseif ($this->assignment->has_instance()) {
+            $mform->setDefault('assignsubmission_snap_cloudenabled', $this->get_config('cloudenabled'));
+        } elseif ($admincloudfeatures == 2) {
+            $mform->setDefault('assignsubmission_snap_cloudenabled', 1);
+        }
+        $mform->hideIf('assignsubmission_snap_cloudenabled', 'assignsubmission_snap_enabled', 'notchecked');
+
+    }
+
+    /**
+     * Save the settings for Snap! submission plugin
+     *
+     * @param stdClass $data
+     * @return bool
+     */
+    public function save_settings(stdClass $data) {
+        $this->set_config('cloudenabled', $data->assignsubmission_snap_cloudenabled);
+        return true;
+    }  
 
     /**
      * Add form elements for settings.
@@ -375,6 +408,12 @@ class assign_submission_snap extends assign_submission_plugin {
         $template->width = $width;
         $template->height = $height;
         $template->editable = $editable;
+        
+        $cloudenabled = false;
+        if ($config->cloud > 0) {
+            $cloudenabled = $this->get_config('cloudenabled');
+        }
+        $template->cloudenabled = $cloudenabled;
 
         $html = $OUTPUT->render_from_template('assignsubmission_snap/snapview', $template);
 
