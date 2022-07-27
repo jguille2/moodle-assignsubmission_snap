@@ -23,7 +23,10 @@
  */
 
 $string['cloud'] = 'Snap! cloud features';
+$string['cloud_enable'] = 'Enable Snap! cloud';
 $string['cloud_help'] = 'Moodle can enable/disable Snap! cloud features and, if enabled, each assignment can individually enable them or not.';
+$string['cloud_helpbutton'] = 'Enable/disable Snap! cloud features.';
+$string['cloud_helpbutton_help'] = 'Enable/disable Snap! cloud features. This checkbox could be disabled for your administrator, blocking the use of the cloud in the entire environment.';
 $string['cloud_op_bydefault'] = 'Snap! cloud features enabled and selected by default';
 $string['cloud_op_disabled'] = 'Snap! cloud features disabled';
 $string['cloud_op_enabled'] = 'Snap! cloud features enabled but not selected by default';
@@ -34,6 +37,10 @@ $string['enabled_help'] = 'If enabled, students are able to edit and send Snap! 
     'If a Snap! XML file is attached into the "Additional files" section, it will be used as a template (starting point) for the student '.
     'when a new submission is created, instead of displaying a new (empty) Snap! project.';
 $string['eventassessableuploaded'] = 'Snap! content uploaded.';
+$string['langmoodle'] = 'Use Moodle language';
+$string['langsnap'] = 'Snap! language';
+$string['lang_helpbutton'] = 'Snap! language setting';
+$string['lang_helpbutton_help'] = 'If selected, Snap! will be loaded with the current Moodle language (forced by course or moodle user).';
 $string['pluginname'] = 'Snap! submissions';
 $string['privacy:metadata:assignmentid'] = 'Assignment ID';
 $string['privacy:metadata:tablepurpose'] = 'Stores the Snap! submission for each attempt.';

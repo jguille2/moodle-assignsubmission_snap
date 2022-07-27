@@ -23,7 +23,10 @@
  */
 
 $string['cloud'] = 'Ús del "cloud" de Snap!';
+$string['cloud_enable'] = 'Habilita el "cloud"';
 $string['cloud_help'] = 'Moodle pot habilitar/deshabilitar les funcionalitats de "cloud" de Snap! i, si s\'habiliten, cada tasca pot individualment habilitar-les o no.';
+$string['cloud_helpbutton'] = 'Habilita/deshabilita el cloud d\'Snap!.';
+$string['cloud_helpbutton_help'] = 'Habilita/deshabilita el cloud d\'Snap!. Aquest selector pot estar deshabilitat per l\'administrador per impedir l\'ús del "cloud" d\'Snap! en tot l\'entorn.';
 $string['cloud_op_bydefault'] = 'Snap! cloud habilitat i seleccionat per defecte';
 $string['cloud_op_disabled'] = 'Snap! cloud deshabilitat';
 $string['cloud_op_enabled'] = 'Snap! cloud habilitat però no seleccionat per defecte';
@@ -34,6 +37,10 @@ $string['enabled_help'] = 'Si està habilitat, l\'estudiantat podrà editar i en
     'Si un projete de Snap! en format de fitxer XML s\'adjunta a la secció de "Fitxes addicionals", aquest serà utilitzat com a plantilla (punt de partida) dels estudiants '.
     'quan s\'inicia una nova tramesa. Si no, tindran un projecte nou (buit) de Snap! com a punt de partida.';
 $string['eventassessableuploaded'] = 'Contingut de Snap! carregat.';
+$string['langmoodle'] = 'Utilitza el mateix idioma que a Moodle';
+$string['langsnap'] = 'Idioma a Snap!';
+$string['lang_helpbutton'] = 'Configuració de l\'idioma a Snap!';
+$string['lang_helpbutton_help'] = 'Si es selecciona, Snap! utilitzarà el mateix idioma que a Moodle (el definit pel curs o per l\'usuari a Moodle).';
 $string['pluginname'] = 'Trameses de Snap!';
 $string['privacy:metadata:assignmentid'] = 'ID de la tramesa';
 $string['privacy:metadata:tablepurpose'] = 'Desa la tramesa de Snap! per cada intent.';

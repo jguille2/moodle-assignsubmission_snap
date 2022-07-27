@@ -23,7 +23,10 @@
  */
 
 $string['cloud'] = 'Utilización del "cloud" de Snap!';
+$string['cloud_enable'] = 'Habilita el "cloud"';
 $string['cloud_help'] = 'Moodle puede habilitar/deshabilitar las funcionalidades de "cloud" de Snap! y, si se habilitan, cada tarea puede individualmente habilitarlas o no.';
+$string['cloud_helpbutton'] = 'Habilita/deshabilita el cloud de Snap!.';
+$string['cloud_helpbutton_help'] = 'Habilita/deshabilita el cloud de Snap!. Este selector puede estar deshabilitado per el administrador para impedir el uso del "cloud" de Snap! en todo el entorno.';
 $string['cloud_op_bydefault'] = 'Snap! cloud habilitat i seleccionat per defecte';
 $string['cloud_op_disabled'] = 'Snap! cloud deshabilitat';
 $string['cloud_op_enabled'] = 'Snap! cloud habilitat però no seleccionat per defecte';
@@ -35,6 +38,10 @@ $string['enabled_help'] = 'Si está habilitado, los estudiantes podrán editar y
     'Si un proyecto de Snap! en formato XML se adjunta en la sección de "Archivos adicionales", éste será utilitzado como plantilla (punto de salida) de los estudiantes '.
     'cuando se inicia un nuevo envío. Si no, tendrán inicialmente un proyecto nuevo (vacío) de Snap!.';
 $string['eventassessableuploaded'] = 'Contenido de Snap! cargado.';
+$string['langmoodle'] = 'Utiliza el mismo idioma que en Moodle';
+$string['langsnap'] = 'Idioma en Snap!';
+$string['lang_helpbutton'] = 'Configuración del idioma en Snap!';
+$string['lang_helpbutton_help'] = 'Si se selecciona, Snap! utilitzará el mismo idioma que en Moodle (el definido por el curso o por el usuario de Moodle).';
 $string['pluginname'] = 'Envíos de Snap!';
 $string['privacy:metadata:assignmentid'] = 'ID del envío';
 $string['privacy:metadata:tablepurpose'] = 'Guarda el envío de Snap! de cada intento.';

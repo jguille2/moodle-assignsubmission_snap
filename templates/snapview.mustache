@@ -28,6 +28,8 @@
     * height - Container height.
     * snap_xmlproject - The XML project to load.
     * editable - Edit mode.
+    * cloudenabled - If Snap! use cloud features
+    * langmoodle - If Snap! use Moodle lang
 
     Example context (json):
     {
@@ -38,7 +40,9 @@
         "width": "100%",
         "height": "400px",
         "snap_xmlproject": "<project name='projectName' app='Snap! 1.0, http://snap.berkeley.edu' version='1'><notes>...</notes></project>",
-        "editable": false
+        "editable": false,
+        "cloudenabled": "0",
+        "langmoodle": "ca"
     }
 
 }}
@@ -54,7 +58,7 @@
         {{#editable}}<a href="#" onclick="document.getElementById('id_submitbutton').click()"><i class="fa fa-fw fa-save"></i></a>{{/editable}}
         {{^editable}}<span class="snap-readonlyWarning_snap">{{#str}} snap_readonlywarning, assignsubmission_snap {{/str}}</span>{{/editable}}
     </div>
-    <iframe src="{{snapurl}}#run:{{snap_xmlproject}}&noRun&editMode&noExitWarning&lang=ca{{^cloudenabled}}&noCloud{{/cloudenabled}}" id="snap_snap-{{userid}}-{{attempt}}" style="width:910px; height: 500px">
+    <iframe src="{{snapurl}}#run:{{snap_xmlproject}}&noRun&editMode&noExitWarning{{#langmoodle}}&lang={{langmoodle}}{{/langmoodle}}{{^cloudenabled}}&noCloud{{/cloudenabled}}" id="snap_snap-{{userid}}-{{attempt}}" style="width:910px; height: 500px">
     </iframe>
 </div>
 {{#editable}}{{#js}}

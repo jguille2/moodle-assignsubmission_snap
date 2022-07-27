@@ -50,11 +50,11 @@ class assign_submission_snap extends assign_submission_plugin {
      * @return void
      */
     public function get_settings(MoodleQuickForm $mform) {
-        global $CFG, $COURSE;
+        global $CFG, $COURSE, $SESSION;
 
         $name = get_string('cloud', 'assignsubmission_snap');
         $mform->addElement('advcheckbox', 'assignsubmission_snap_cloudenabled',
-                $name, get_string('enable'), null, array(0,1));
+                $name, get_string('cloud_enable', 'assignsubmission_snap'), null, array(0,1));
         $mform->setDefault('assignsubmission_snap_cloudenabled', 0);
         $admincloudfeatures = get_config('assignsubmission_snap', 'cloud');
         if ($admincloudfeatures == 0) {
@@ -64,8 +64,21 @@ class assign_submission_snap extends assign_submission_plugin {
         } elseif ($admincloudfeatures == 2) {
             $mform->setDefault('assignsubmission_snap_cloudenabled', 1);
         }
+        $mform->addHelpButton('assignsubmission_snap_cloudenabled',
+                              'cloud_helpbutton',
+                              'assignsubmission_snap');
         $mform->hideIf('assignsubmission_snap_cloudenabled', 'assignsubmission_snap_enabled', 'notchecked');
-
+        
+        $name = get_string('langsnap', 'assignsubmission_snap');
+        $mform->addElement('advcheckbox', 'assignsubmission_snap_langmoodle',
+                $name, get_string('langmoodle', 'assignsubmission_snap'), null, array(0,1));
+        if ($this->assignment->has_instance()) {
+            $mform->setDefault('assignsubmission_snap_langmoodle', $this->get_config('langmoodle'));
+        }
+        $mform->addHelpButton('assignsubmission_snap_langmoodle',
+                              'lang_helpbutton',
+                              'assignsubmission_snap');
+        $mform->hideIf('assignsubmission_snap_langmoodle', 'assignsubmission_snap_enabled', 'notchecked');
     }
 
     /**
@@ -76,6 +89,7 @@ class assign_submission_snap extends assign_submission_plugin {
      */
     public function save_settings(stdClass $data) {
         $this->set_config('cloudenabled', $data->assignsubmission_snap_cloudenabled);
+        $this->set_config('langmoodle', $data->assignsubmission_snap_langmoodle);
         return true;
     }  
 
@@ -391,7 +405,7 @@ class assign_submission_snap extends assign_submission_plugin {
      */
     private function get_view_snapframe(string $userid, string $attempt, bool $loaded = false, string $xmlproject = null,
             string $width = '100%', string $height = '600px', bool $editable = false): string {
-        global $CFG, $OUTPUT, $USER;
+        global $CFG, $OUTPUT, $USER, $COURSE, $SESSION;
 
         $template = new \stdClass();
         $config = get_config('assignsubmission_snap');
@@ -414,7 +428,17 @@ class assign_submission_snap extends assign_submission_plugin {
             $cloudenabled = $this->get_config('cloudenabled');
         }
         $template->cloudenabled = $cloudenabled;
-
+        
+        $langmoodle = false;
+        if ($this->get_config('langmoodle') > 0) {
+            if ($COURSE->lang != '') {
+                $langmoodle = substr($COURSE->lang, 0, 2);
+            } elseif ($SESSION->lang != '') {
+                $langmoodle = substr($SESSION->lang, 0, 2);
+            }
+        }
+        $template->langmoodle = $langmoodle;
+        
         $html = $OUTPUT->render_from_template('assignsubmission_snap/snapview', $template);
 
         return $html;
