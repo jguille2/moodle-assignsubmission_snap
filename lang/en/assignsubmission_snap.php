@@ -32,6 +32,12 @@ $string['cloud_op_disabled'] = 'Snap! cloud features disabled';
 $string['cloud_op_enabled'] = 'Snap! cloud features enabled but not selected by default';
 $string['default'] = 'Selected by default in new assignments';
 $string['default_help'] = 'If set, this submission method will be selected by default for all new assignments.';
+$string['distros'] = 'Available Snap! distros';
+$string['distros_help'] = 'We need a current online distro (like Snap!-Berkeley, just the default value). '.
+    'But we can add other distros (one per line) and then, teachers will choose the one they need for each assignment. '.
+    'The format (for each entry) is: <b>&lt;code&gt; | &lt;visible name&gt; | &lt;url&gt;</b>. '.
+    'Keep the "code" parameter in future changes (url...) to maintain their relationship with the previous assignments. '.
+    'First distro is the default option for new assignments and for those with a "distro" disabled.';
 $string['enabled'] = 'Snap!';
 $string['enabled_help'] = 'If enabled, students are able to edit and send Snap! projects directly for their submission. ' .
     'If a Snap! XML file is attached into the "Additional files" section, it will be used as a template (starting point) for the student '.
@@ -48,11 +54,15 @@ $string['privacy:metadata:submissionpurpose'] = 'The submission ID that links to
 $string['privacy:metadata:textpurpose'] = 'The actual Snap! project submitted for this attempt of the assignment.';
 $string['privacy:path'] = 'Snap! project';
 $string['snap'] = 'Snap!';
+$string['snapdistro'] = 'Snap! distro';
+$string['snapdistro_helpbutton'] = 'Choose Snap! distro';
+$string['snapdistro_helpbutton_help'] = 'Choose the Snap! distro you want for this assignment. Moodle administrators can add-edit-remove current available distros.';
 $string['snapfilename'] = 'snapproject.xml';
 $string['snap_project'] = 'Snap! project';
 $string['snap_embedded'] = 'Snap! embedded in Moodle';
 $string['snap_readonlywarning'] = 'READ-ONLY MODE';
-$string['url'] = 'Snap! URLs availables';
-$string['url_help'] = 'The pairs [\'name\', \'url\'] of all the distributions that we want to enable must be entered. '.
-     'The \'name\' is important because it will identify the distribution on subsequent URL changes. '.
-     'The first option (pair) will be the default option.';
+$string['distros'] = 'Available Snap! distros';
+$string['disros_help'] = 'We need a current online distro (like Snap! berkeley, set by default). '.
+     'But we can add other distros (one by line) and then, teachers will choose the one they need for each assignment. '.
+     'The format (for each distro is): <b>&lt;code&gt; | &lt;visible name&gt; | &lt;url&gt;</b>. '.
+     'Keep the "code" parameter in future changes (url...) to maintain their relationship with the previous assignments.';

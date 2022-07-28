@@ -41,7 +41,8 @@ const getXMLInput = () => {
 };
 
 const registerListenerEvents = (form, snapFrame) => {
-    form.addEventListener('submit',
+    const submitButton = document.getElementById('id_submitbutton');
+    submitButton.addEventListener('onclick',
         function(event) {
             event.preventDefault();
             window.addEventListener('message',function(e) {

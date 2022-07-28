@@ -34,7 +34,6 @@ require_once($CFG->dirroot.'/mod/assign/submission/snap/lib.php');
  
 class assign_submission_snap extends assign_submission_plugin {
 
-    
     /**
      * Get the name of the snap submission plugin.
      * @return string
@@ -52,6 +51,33 @@ class assign_submission_snap extends assign_submission_plugin {
     public function get_settings(MoodleQuickForm $mform) {
         global $CFG, $COURSE, $SESSION;
 
+        $distros_raw = explode("\n",get_config('assignsubmission_snap', 'distros'));
+        $distros = array();
+        $distroCodes = array();
+        foreach ($distros_raw as $distro) {
+            $line = explode('|', $distro);
+            if (count($line) > 2) {
+                $distroCode = trim(array_shift($line));
+                $distroName = trim(array_shift($line));
+                $distroURL = trim(array_shift($line));
+                $distros[$distroCode] = $distroName." - ".$distroURL;
+                array_push($distroCodes, $distroCode);
+            }
+        }
+
+        $name = get_string('snapdistro', 'assignsubmission_snap');
+        $mform->addElement('select', 'assignsubmission_snap_snapdistro',
+                $name, $distros);
+        if ($this->assignment->has_instance()) {
+            if (in_array($this->get_config('snapdistro'), $distroCodes)) {
+                $mform->setDefault('assignsubmission_snap_snapdistro', $this->get_config('snapdistro'));
+            }
+        }
+        $mform->addHelpButton('assignsubmission_snap_snapdistro',
+                              'snapdistro_helpbutton',
+                              'assignsubmission_snap');
+        $mform->hideIf('assignsubmission_snap_snapdistro', 'assignsubmission_snap_enabled', 'notchecked');
+
         $name = get_string('cloud', 'assignsubmission_snap');
         $mform->addElement('advcheckbox', 'assignsubmission_snap_cloudenabled',
                 $name, get_string('cloud_enable', 'assignsubmission_snap'), null, array(0,1));
@@ -68,7 +94,7 @@ class assign_submission_snap extends assign_submission_plugin {
                               'cloud_helpbutton',
                               'assignsubmission_snap');
         $mform->hideIf('assignsubmission_snap_cloudenabled', 'assignsubmission_snap_enabled', 'notchecked');
-        
+
         $name = get_string('langsnap', 'assignsubmission_snap');
         $mform->addElement('advcheckbox', 'assignsubmission_snap_langmoodle',
                 $name, get_string('langmoodle', 'assignsubmission_snap'), null, array(0,1));
@@ -79,6 +105,7 @@ class assign_submission_snap extends assign_submission_plugin {
                               'lang_helpbutton',
                               'assignsubmission_snap');
         $mform->hideIf('assignsubmission_snap_langmoodle', 'assignsubmission_snap_enabled', 'notchecked');
+
     }
 
     /**
@@ -88,10 +115,13 @@ class assign_submission_snap extends assign_submission_plugin {
      * @return bool
      */
     public function save_settings(stdClass $data) {
+
+        $this->set_config('snapdistro', $data->assignsubmission_snap_snapdistro);
         $this->set_config('cloudenabled', $data->assignsubmission_snap_cloudenabled);
         $this->set_config('langmoodle', $data->assignsubmission_snap_langmoodle);
         return true;
-    }  
+
+    }
 
     /**
      * Add form elements for settings.
@@ -409,7 +439,27 @@ class assign_submission_snap extends assign_submission_plugin {
 
         $template = new \stdClass();
         $config = get_config('assignsubmission_snap');
-        $template->snapurl = $config->url;
+
+        $distros_raw = explode("\n",get_config('assignsubmission_snap', 'distros'));
+        $distros = array();
+        $distroCodes = array();
+        foreach ($distros_raw as $distro) {
+            $line = explode('|', $distro);
+            if (count($line) > 2) {
+                $distroCode = trim(array_shift($line));
+                $distroName = trim(array_shift($line));
+                $distroURL = trim(array_shift($line));
+                $distros[$distroCode] = $distroURL;
+                array_push($distroCodes, $distroCode);
+            }
+        }
+        if (in_array($this->get_config('snapdistro'), $distroCodes)) {
+            $snapurl = $distros[$this->get_config('snapdistro')];
+        } else {
+            $snapurl = array_values($distros)[0];
+        }
+
+        $template->snapurl = $snapurl;
         if ($xmlproject) {
             $template->snap_xmlproject = $xmlproject;
         }
@@ -422,13 +472,13 @@ class assign_submission_snap extends assign_submission_plugin {
         $template->width = $width;
         $template->height = $height;
         $template->editable = $editable;
-        
+
         $cloudenabled = false;
         if ($config->cloud > 0) {
             $cloudenabled = $this->get_config('cloudenabled');
         }
         $template->cloudenabled = $cloudenabled;
-        
+
         $langmoodle = false;
         if ($this->get_config('langmoodle') > 0) {
             if ($COURSE->lang != '') {
@@ -438,7 +488,7 @@ class assign_submission_snap extends assign_submission_plugin {
             }
         }
         $template->langmoodle = $langmoodle;
-        
+
         $html = $OUTPUT->render_from_template('assignsubmission_snap/snapview', $template);
 
         return $html;
