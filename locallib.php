@@ -529,7 +529,7 @@ class assign_submission_snap extends assign_submission_plugin {
         foreach ($fsfiles as $file) {
             if ($file->get_mimetype() == 'application/xml') {
                 $content = $file->get_content();
-                if (strpos($content, 'app="Snap!')) {
+                if (strpos($content, 'project name=')) {
                     // This is a Snap! file. Use it as template (instead of displaying an empty project to the students).
                     return str_replace(array("&#xD;", "\r", "\n"), "", $content);
                 }
