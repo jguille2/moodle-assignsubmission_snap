@@ -141,7 +141,7 @@ class assign_submission_snap extends assign_submission_plugin {
         $html = $this->get_view_snapframe($submission->userid, $submission->attemptnumber, true, $xmlproject, '100%', '560px', true);
 
         $snapDistro = $this->get_snapdistros()['distroSelected'][1];
-        $mform->addElement('header', 'snapProject', get_string('snap_project', 'assignsubmission_snap')." ".$snapDistro);
+        $mform->addElement('header', 'snapProject', get_string('snap_project', 'assignsubmission_snap')." - ".$snapDistro);
         $mform->addElement('html', $html, $this->get_name(), null, null);
 
         return true;
