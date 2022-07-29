@@ -32,7 +32,7 @@ if ($ADMIN->fulltree) {
                    new lang_string('default_help', 'assignsubmission_snap'), 0));
 
     $exampleDistros = "</br><i>Example with two available distros:</i></br><textarea rows='2' cols='60' disabled>snap | Snap! | https://snap.berkeley.edu/snap/snap.html
-snap4arduino | Snap4Arduino | https://snap4arduino.rocks/run</textarea>";
+snap4arduino | Snap4Arduino | https://snap4arduino.rocks/run/index.html</textarea>";
     $settings->add(new admin_setting_configtextarea('assignsubmission_snap/distros',
                    new lang_string('distros', 'assignsubmission_snap'),
                    new lang_string('distros_help', 'assignsubmission_snap').$exampleDistros,

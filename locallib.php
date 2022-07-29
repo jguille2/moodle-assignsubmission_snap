@@ -51,18 +51,11 @@ class assign_submission_snap extends assign_submission_plugin {
     public function get_settings(MoodleQuickForm $mform) {
         global $CFG, $COURSE, $SESSION;
 
-        $distros_raw = explode("\n",get_config('assignsubmission_snap', 'distros'));
+        $distrosInfo = $this->get_snapdistros();
+        $distroCodes = $distrosInfo['distroCodes'];
         $distros = array();
-        $distroCodes = array();
-        foreach ($distros_raw as $distro) {
-            $line = explode('|', $distro);
-            if (count($line) > 2) {
-                $distroCode = trim(array_shift($line));
-                $distroName = trim(array_shift($line));
-                $distroURL = trim(array_shift($line));
-                $distros[$distroCode] = $distroName." - ".$distroURL;
-                array_push($distroCodes, $distroCode);
-            }
+        foreach ($distrosInfo['snapDistros'] as $distro) {
+            $distros[$distro[0]] = $distro[1]." - ".$distro[2];
         }
 
         $name = get_string('snapdistro', 'assignsubmission_snap');
@@ -146,7 +139,9 @@ class assign_submission_snap extends assign_submission_plugin {
         $mform->setType('snap_xmlproject', PARAM_RAW);
 
         $html = $this->get_view_snapframe($submission->userid, $submission->attemptnumber, true, $xmlproject, '100%', '560px', true);
-        $mform->addElement('header', 'snapProject', get_string('snap_project', 'assignsubmission_snap'));
+
+        $snapDistro = $this->get_snapdistros()['distroSelected'][1];
+        $mform->addElement('header', 'snapProject', get_string('snap_project', 'assignsubmission_snap')." ".$snapDistro);
         $mform->addElement('html', $html, $this->get_name(), null, null);
 
         return true;
@@ -421,6 +416,33 @@ class assign_submission_snap extends assign_submission_plugin {
     }
 
     /**
+     * Return the Snap! distros information.
+     *
+     * @return array with the Snap! distros information (distroCodes, snapDistros and distroSelected)
+     */
+    private function get_snapdistros() {
+        $distros_raw = explode("\n",get_config('assignsubmission_snap', 'distros'));
+        $distros = array();
+        $distroCodes = array();
+        foreach ($distros_raw as $distro) {
+            $line = explode('|', $distro);
+            if (count($line) > 2) {
+                $distroCode = trim(array_shift($line));
+                $distroName = trim(array_shift($line));
+                $distroURL = trim(array_shift($line));
+                $distros['snapDistros'][$distroCode] = [$distroCode, $distroName, $distroURL];
+                array_push($distroCodes, $distroCode);
+            }
+        }
+        $distros['distroCodes'] = $distroCodes;
+        if (in_array($this->get_config('snapdistro'), $distroCodes)) {
+            $distros['distroSelected'] = $distros['snapDistros'][$this->get_config('snapdistro')];
+        } else {
+            $distros['distroSelected'] = array_values($distros['snapDistros'])[0];
+        }
+        return $distros;
+    }
+    /**
      * Return the Snap! project content with the plugin toolbar.
      *
      *
@@ -440,26 +462,7 @@ class assign_submission_snap extends assign_submission_plugin {
         $template = new \stdClass();
         $config = get_config('assignsubmission_snap');
 
-        $distros_raw = explode("\n",get_config('assignsubmission_snap', 'distros'));
-        $distros = array();
-        $distroCodes = array();
-        foreach ($distros_raw as $distro) {
-            $line = explode('|', $distro);
-            if (count($line) > 2) {
-                $distroCode = trim(array_shift($line));
-                $distroName = trim(array_shift($line));
-                $distroURL = trim(array_shift($line));
-                $distros[$distroCode] = $distroURL;
-                array_push($distroCodes, $distroCode);
-            }
-        }
-        if (in_array($this->get_config('snapdistro'), $distroCodes)) {
-            $snapurl = $distros[$this->get_config('snapdistro')];
-        } else {
-            $snapurl = array_values($distros)[0];
-        }
-
-        $template->snapurl = $snapurl;
+        $template->snapurl = $this->get_snapdistros()['distroSelected'][2];
         if ($xmlproject) {
             $template->snap_xmlproject = $xmlproject;
         }
