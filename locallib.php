@@ -464,7 +464,7 @@ class assign_submission_snap extends assign_submission_plugin {
 
         $template->snapurl = $this->get_snapdistros()['distroSelected'][2];
         if ($xmlproject) {
-            $template->snap_xmlproject = $xmlproject;
+            $template->snap_xmlproject = rawurlencode($xmlproject);
         }
         if (!$userid) {
             $userid = $USER->id;
@@ -512,7 +512,7 @@ class assign_submission_snap extends assign_submission_plugin {
             }
         }
 
-        return str_replace(array("&#xD;", "\r", "\n"), "", $xmlproject);
+        return str_replace(array("&#xD;"), "\n", $xmlproject);
     }
 
     /**
@@ -534,7 +534,7 @@ class assign_submission_snap extends assign_submission_plugin {
                 $content = $file->get_content();
                 if (strpos($content, 'project name=')) {
                     // This is a Snap! file. Use it as template (instead of displaying an empty project to the students).
-                    return str_replace(array("&#xD;", "\r", "\n"), "", $content);
+                    return str_replace(array("&#xD;"), "\n", $content);
                 }
             }
         }
